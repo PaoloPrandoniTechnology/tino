@@ -1,5 +1,8 @@
 {
-  "chat_id": null,
-  "offset": 0,
-  "ultimo": null
+  "chat_id": 5565947226,
+  "offset": 121675716,
+  "ultimo": {
+    "data": "2026-10-29",
+    "testo": "Ciao"
+  }
 }
