@@ -46,6 +46,7 @@ mai di più, perché i contenuti generati in massa chiudono il negozio.
 | [OPERATIVO.md](OPERATIVO.md) | Il runbook: la settimana, i sette passi di produzione, le soglie, la potatura, i soldi. |
 | [PRODOTTI.md](PRODOTTI.md) | Cosa produce: famiglie di prodotto, listino, esclusioni, test di validità. |
 | [AGENTE-FABBRICA.md](AGENTE-FABBRICA.md) | Il loop dell'agente, lo stato, il charter, il filtro di qualità umano. |
+| [DISTRIBUZIONE.md](DISTRIBUZIONE.md) | Come trova visite: cosa si automatizza per via ufficiale, i tre formati, il funnel, i livelli di sostenibilità. |
 | [INFRA.md](INFRA.md) | Dove vive: repository, cron, stato, segreti, costi reali. |
 | [REGOLAMENTO.md](REGOLAMENTO.md) | Le regole pubbliche: capitale, curva, contabilità, cosa si pubblica. |
 | `agente/` | Il codice: ledger append-only, metriche, loop, chiamata opzionale al modello. |
@@ -85,7 +86,10 @@ Le regole complete, con le sanzioni, stanno in [REGOLAMENTO.md](REGOLAMENTO.md).
 
 Il repository è la fonte: ogni esecuzione lascia un commit con data, diff e log. La
 dashboard è un sito statico che legge `data.json` committato dall'agente — nessun
-server, nessun database, nessun numero inserito a mano.
+server, nessun database, nessun numero inserito a mano. I canali pubblicano gli stessi
+numeri della dashboard, con la cadenza e i formati descritti in
+[DISTRIBUZIONE.md](DISTRIBUZIONE.md): un video senza una cifra presa dal ledger non
+esce.
 
 ```bash
 python3 -m http.server 3000 -d dashboard
