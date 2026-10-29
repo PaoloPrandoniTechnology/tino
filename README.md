@@ -48,7 +48,7 @@ mai di più, perché i contenuti generati in massa chiudono il negozio.
 | [AGENTE-FABBRICA.md](AGENTE-FABBRICA.md) | Il loop dell'agente, lo stato, il charter, il filtro di qualità umano. |
 | [DISTRIBUZIONE.md](DISTRIBUZIONE.md) | Come trova visite: cosa si automatizza per via ufficiale, i tre formati, il funnel, i livelli di sostenibilità. |
 | [INFRA.md](INFRA.md) | Dove vive: repository, cron, stato, segreti, costi reali. |
-| [NOTIFICHE.md](NOTIFICHE.md) | Come il conto del giorno arriva sul telefono: Telegram e WhatsApp, passi e costi. |
+| [NOTIFICHE.md](NOTIFICHE.md) | Il bot Telegram: comandi in entrata, conto del giorno in uscita; il canale WhatsApp e i suoi costi. |
 | [REGOLAMENTO.md](REGOLAMENTO.md) | Le regole pubbliche: capitale, curva, contabilità, cosa si pubblica. |
 | `agente/` | Il codice: ledger append-only, metriche, loop, chiamata opzionale al modello. |
 | `dashboard/` | La vetrina: copertura, crescita, catalogo, movimenti, giornale di bordo. |

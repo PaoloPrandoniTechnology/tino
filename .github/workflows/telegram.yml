@@ -1,0 +1,45 @@
+name: telegram
+
+# Il bot risponde ai messaggi che gli scrivi. Ogni 15 minuti controlla se c'è
+# qualcosa di nuovo; se non c'è, non fa commit e finisce in pochi secondi.
+# Il cron di GitHub può ritardare di qualche minuto: è un bot, non un centralino.
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: telegram
+  cancel-in-progress: false
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Risposte ai messaggi
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python3 -m agente.telegram --state state
+
+      - name: Commit dell'offset
+        run: |
+          git config user.name "Tino (agente)"
+          git config user.email "64271855+PaoloPrandoniTechnology@users.noreply.github.com"
+          git add state/telegram.json
+          if git diff --staged --quiet; then
+            echo "nessun messaggio da registrare"
+          else
+            git commit -m "telegram $(date -u +%F_%H:%M)"
+            git pull --rebase --quiet
+            git push
+          fi

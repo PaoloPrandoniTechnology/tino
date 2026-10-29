@@ -52,6 +52,7 @@ jobs:
             echo "nessuna modifica da committare"
           else
             git commit -m "run $(date -u +%F)"
+            git pull --rebase --quiet
             git push
           fi
 

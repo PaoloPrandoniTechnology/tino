@@ -128,6 +128,29 @@ def canali(env=None):
     return out
 
 
+def chat_imparato(stato="state"):
+    """L'id del chat che il bot ha salvato dopo il primo messaggio ricevuto."""
+    try:
+        with open(os.path.join(stato, "telegram.json"), encoding="utf-8") as f:
+            return json.load(f).get("chat_id")
+    except (OSError, ValueError):
+        return None
+
+
+def ambiente_con_chat(stato="state", env=None):
+    """L'ambiente, con il chat di Telegram imparato dal bot se il secret manca.
+
+    Così il primo messaggio che scrivi al bot basta a far partire i digest: non
+    serve copiare a mano un id da `getUpdates`.
+    """
+    env = dict(os.environ if env is None else env)
+    if not env.get("TELEGRAM_CHAT_ID"):
+        chat = chat_imparato(stato)
+        if chat:
+            env["TELEGRAM_CHAT_ID"] = str(chat)
+    return env
+
+
 def invia(report, env=None):
     env = os.environ if env is None else env
     testo, parametri = componi(report)
@@ -163,17 +186,19 @@ def main(argv=None):
     report = loop.costruisci_report(args.state, args.today)
     testo, parametri = componi(report)
 
+    env = ambiente_con_chat(args.state)
+
     if args.dry_run:
         print(testo)
-        print(f"canali configurati: {', '.join(canali()) or 'nessuno'}")
+        print(f"canali configurati: {', '.join(canali(env)) or 'nessuno'}")
         return 0
 
-    if not canali():
+    if not canali(env):
         print("nessun canale configurato: niente da inviare")
         print(testo)
         return 0
 
-    _, risultati = invia(report)
+    _, risultati = invia(report, env)
     for voce in risultati:
         print(f"{voce['canale']}: {'ok' if voce['ok'] else 'errore ' + str(voce['stato'])}")
     return 0 if all(v["ok"] for v in risultati) else 1
