@@ -8,3 +8,6 @@ __pycache__/
 
 # log locali (device flow, push)
 *.log
+
+# backup locali prima di riscritture di storia
+.git-backup/

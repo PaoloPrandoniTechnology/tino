@@ -45,8 +45,8 @@ jobs:
 
       - name: Commit dello stato
         run: |
-          git config user.name "tino"
-          git config user.email "tino@users.noreply.github.com"
+          git config user.name "Tino (agente)"
+          git config user.email "64271855+PaoloPrandoniTechnology@users.noreply.github.com"
           git add state dashboard
           if git diff --staged --quiet; then
             echo "nessuna modifica da committare"
