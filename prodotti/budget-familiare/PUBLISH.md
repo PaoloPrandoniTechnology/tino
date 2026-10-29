@@ -10,10 +10,11 @@ Tutto quello che serve è qui. Tu fai solo click, login e incolla: il resto è g
 | Negozio | https://www.etsy.com/sell | Apri il negozio: KYC, dati fiscali, IBAN |
 | Listing | https://www.etsy.com/your/shops/me/tools/listings/create | Compila con i blocchi qui sotto |
 
-Appena il repo esiste, dalla cartella del progetto:
+Repository già creato e collegato: `https://github.com/PaoloPrandoniTechnology/tino`.
+Per ripubblicare manualmente, dalla cartella del progetto:
 
 ```bash
-bash COLLEGA-GITHUB.sh TUO-UTENTE
+bash COLLEGA-GITHUB.sh PaoloPrandoniTechnology
 ```
 
 Lo script imposta il remote, committa quello che manca e pusha su `main`.
