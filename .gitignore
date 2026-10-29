@@ -5,3 +5,6 @@ __pycache__/
 .dev-server.log
 .check.js
 .c.js
+
+# log locali (device flow, push)
+*.log
