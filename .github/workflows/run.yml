@@ -1,0 +1,56 @@
+name: tino
+
+# Quattro esecuzioni a settimana (mar-ven, 06:00 UTC).
+# Su repo pubblico i cron si disattivano dopo 60 giorni di inattività:
+# ogni esecuzione fa un commit, quindi il problema non si presenta.
+on:
+  schedule:
+    - cron: "0 6 * * 2"
+    - cron: "0 6 * * 3"
+    - cron: "0 6 * * 4"
+    - cron: "0 6 * * 5"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tino
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verifica ledger (prima)
+        run: python3 -m agente.ledger --check state/ledger.jsonl
+
+      - name: Test
+        run: python3 -m unittest discover -s tests -t . -v
+
+      - name: Esecuzione
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python3 -m agente.loop
+
+      - name: Verifica ledger (dopo)
+        run: python3 -m agente.ledger --check state/ledger.jsonl
+
+      - name: Commit dello stato
+        run: |
+          git config user.name "tino"
+          git config user.email "tino@users.noreply.github.com"
+          git add state dashboard
+          if git diff --staged --quiet; then
+            echo "nessuna modifica da committare"
+          else
+            git commit -m "run $(date -u +%F)"
+            git push
+          fi

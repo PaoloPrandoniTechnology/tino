@@ -1,0 +1,9 @@
+{
+  "inizio": "2026-11-02",
+  "giorni_stagione": 100,
+  "costo_riferimento_mese": 108,
+  "spesa_mese": 16,
+  "esecuzioni_settimana": 4,
+  "costo_per_esecuzione": 1.0,
+  "quota_reinvestimento": 0.3
+}

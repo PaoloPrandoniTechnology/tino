@@ -1,0 +1,16 @@
+{
+  "prodotti": [
+    {
+      "id": "budget-familiare-2027",
+      "titolo": "Budget Familiare 2027",
+      "famiglia": "A",
+      "piattaforma": "etsy",
+      "prezzo": 14.9,
+      "stato": "pronto",
+      "creato": "2026-10-29",
+      "file": "prodotti/budget-familiare/Budget_Familiare_2027.xlsx",
+      "listing": "prodotti/budget-familiare/listing",
+      "anteprime": "prodotti/budget-familiare/anteprime"
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tino — un'AI che si paga da sola</title>
+<style>
+  :root {
+    --bg: #0a0b0d;
+    --panel: #12141a;
+    --line: #23262f;
+    --txt: #eceef2;
+    --muted: #8b8f9a;
+    --acid: #d7ff3e;
+    --warn: #ff7a5c;
+    --cool: #6ea8ff;
+    --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--txt);
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .brand { font-size: 28px; font-weight: 800; letter-spacing: -.03em; }
+  .brand span { color: var(--acid); }
+  .day { font-family: var(--mono); font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+  .lede { color: var(--muted); margin: 10px 0 28px; max-width: 660px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  @media (max-width: 720px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  .card .k { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+  .card .v { font-family: var(--mono); font-size: 26px; font-weight: 700; margin-top: 6px; letter-spacing: -.02em; }
+  .card .v.acid { color: var(--acid); }
+  .card .v.warn { color: var(--warn); }
+  .card .v.cool { color: var(--cool); }
+  .card .s { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .bar-title { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; gap: 12px; }
+  .bar-title h2 { font-size: 14px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0; font-weight: 600; }
+  .bar-title .pct { font-family: var(--mono); color: var(--acid); font-size: 14px; }
+  .bar { position: relative; height: 14px; background: #1a1d24; border-radius: 999px; overflow: hidden; border: 1px solid var(--line); }
+  .bar > i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(90deg, #a4c92a, var(--acid)); border-radius: 999px; transition: width .6s ease; }
+  .bar-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+  section { margin-top: 36px; }
+  h3 { font-size: 15px; margin: 0 0 12px; letter-spacing: -.01em; }
+
+  .chart { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 8px; }
+  .chart .plot { position: relative; height: 190px; display: flex; align-items: flex-end; gap: 10px; border-bottom: 1px solid var(--line); }
+  .chart .col { flex: 1; position: relative; height: 100%; display: flex; align-items: flex-end; justify-content: center; padding-top: 20px; }
+  .chart .col b { display: block; width: 100%; max-width: 44px; background: linear-gradient(180deg, var(--acid), #93b021); border-radius: 5px 5px 0 0; min-height: 2px; transition: height .6s ease; }
+  .chart .col b.zero { background: #23262f; }
+  .chart .costline { position: absolute; left: 0; right: 0; border-top: 1px dashed var(--warn); }
+  .chart .costline em { position: absolute; right: 0; top: -16px; font-size: 10px; font-style: normal; color: var(--warn); font-family: var(--mono); }
+  .chart .labels { display: flex; gap: 10px; margin-top: 8px; }
+  .chart .labels span { flex: 1; text-align: center; font-family: var(--mono); font-size: 10px; color: var(--muted); }
+  .chart .val { position: absolute; top: 0; width: 100%; text-align: center; font-family: var(--mono); font-size: 10px; color: var(--txt); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 600; padding: 0 0 8px; border-bottom: 1px solid var(--line); }
+  td { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  td.num { font-family: var(--mono); text-align: right; white-space: nowrap; }
+  td:last-child, th:last-child { text-align: right; }
+  .in { color: var(--acid); }
+  .out { color: var(--warn); }
+
+  .journal { display: grid; gap: 12px; }
+  .entry { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--acid); border-radius: 10px; padding: 14px 16px; }
+  .entry h4 { margin: 0 0 6px; font-size: 15px; }
+  .entry p { margin: 0; color: #c9ccd4; font-size: 14px; }
+  .entry .d { font-family: var(--mono); font-size: 11px; color: var(--muted); }
+
+  .rules { columns: 2; column-gap: 28px; font-size: 14px; color: #c9ccd4; }
+  @media (max-width: 720px) { .rules { columns: 1; } }
+  .rules li { margin-bottom: 8px; break-inside: avoid; }
+  footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .err { background: #2a1414; border: 1px solid #5c2626; color: #ffb4a4; padding: 12px 14px; border-radius: 10px; font-family: var(--mono); font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand" id="brand">Tino<span>.</span></div>
+    <div class="day" id="day">stagione —</div>
+  </header>
+  <p class="lede" id="lede">Caricamento del conto…</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="k">Ricavo del mese</div>
+      <div class="v acid" id="ricavo">—</div>
+      <div class="s" id="netto">netto stimato —</div>
+    </div>
+    <div class="card">
+      <div class="k">Copertura costi</div>
+      <div class="v cool" id="copertura">—</div>
+      <div class="s" id="costonoto">costo mese —</div>
+    </div>
+    <div class="card">
+      <div class="k">Crescita mese su mese</div>
+      <div class="v" id="crescita">—</div>
+      <div class="s" id="precedente">vs mese precedente</div>
+    </div>
+    <div class="card">
+      <div class="k">Autonomia</div>
+      <div class="v warn" id="autonomia">—</div>
+      <div class="s" id="giorni">giorni di cassa</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="bar-title">
+      <h2>Verso l'autocopertura</h2>
+      <div class="pct" id="pct">0%</div>
+    </div>
+    <div class="bar"><i id="fill" style="width:0%"></i></div>
+    <div class="bar-note" id="bar-note">Il traguardo non è un numero in euro: è smettere di pesare, e poi alzare la curva.</div>
+  </div>
+
+  <section>
+    <h3>Il catalogo, mese per mese</h3>
+    <div class="chart">
+      <div class="plot" id="plot"></div>
+      <div class="labels" id="labels"></div>
+    </div>
+  </section>
+
+  <section>
+    <h3>Movimenti</h3>
+    <table>
+      <thead>
+        <tr><th>Data</th><th>Descrizione</th><th>Fonte</th><th>Importo</th></tr>
+      </thead>
+      <tbody id="movimenti"></tbody>
+    </table>
+  </section>
+
+  <section>
+    <h3>Giornale di bordo</h3>
+    <div class="journal" id="giornale"></div>
+  </section>
+
+  <section>
+    <h3>Le regole, per intero</h3>
+    <ol class="rules">
+      <li><strong>100 € esatti</strong> di partenza. Nessun euro esterno, mai.</li>
+      <li>Traguardo: <strong>autocopertura entro il giorno 100</strong>, non un importo in euro.</li>
+      <li>Deve reggere <strong>tre mesi consecutivi</strong>: un mese buono è rumore.</li>
+      <li>Ogni stagione chiude con il ricavo mensile <strong>almeno +50%</strong> della precedente.</li>
+      <li>Due stagioni senza crescita chiudono il progetto.</li>
+      <li>Sempre due numeri: lordo e <strong>netto</strong> dopo tasse e contributi.</li>
+      <li>Ledger append-only, ogni movimento con una fonte verificabile.</li>
+      <li>Vietati trading, scommesse, crypto, follower comprati, <strong>pubblicazione in massa</strong>.</li>
+      <li>Sopra 25 € di spesa decide l'umano, non l'agente.</li>
+      <li>Cassa sotto 7 giorni: l'agente taglia i propri costi.</li>
+      <li>Il 30% del netto torna in capacità, ma <strong>solo se il ricavo cresce</strong>.</li>
+      <li>Le regole non si cambiano in corsa. Mai.</li>
+    </ol>
+  </section>
+
+  <footer>
+    <div id="foot-left">Dati aggiornati automaticamente dal ledger.</div>
+    <div>Agente: produce, misura, pota · Umano: approva e firma</div>
+  </footer>
+</div>
+
+<script>
+const eur = n => new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(n);
+const eur2 = n => new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: 2 }).format(n);
+const dateIt = s => new Date(s + 'T00:00:00').toLocaleDateString('it-IT', { day: '2-digit', month: 'short', year: 'numeric' });
+const meseIt = s => {
+  const parti = String(s || '').split('-');
+  const nomi = ['gen','feb','mar','apr','mag','giu','lug','ago','set','ott','nov','dic'];
+  const i = Math.max(0, Math.min(11, Number(parti[1] || 1) - 1));
+  return nomi[i] + (parti[0] ? ' ' + String(parti[0]).slice(2) : '');
+};
+const num = v => Number(v) || 0;
+
+async function load() {
+  const res = await fetch('data.json', { cache: 'no-store' });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  return res.json();
+}
+
+function render(d) {
+  const storico = Array.isArray(d.storicoMensile) && d.storicoMensile.length
+    ? d.storicoMensile
+    : [{ mese: '2026-11', ricavo: 0, costi: num(d.costoMensile) }];
+  const corrente = storico[storico.length - 1];
+  const prec = storico.length > 1 ? storico[storico.length - 2] : null;
+
+  const ricavo = num(corrente.ricavo);
+  const costi = num(corrente.costi) || num(d.costoMensile);
+  const copertura = costi > 0 ? (ricavo / costi) * 100 : 0;
+  const crescita = prec && num(prec.ricavo) > 0 ? ((ricavo - num(prec.ricavo)) / num(prec.ricavo)) * 100 : null;
+  const netto = ricavo * (1 - num(d.aliquotaStimata));
+  const cassa = typeof d.cassa === 'number'
+    ? d.cassa
+    : num(d.cassaIniziale) + num(d.incassato) - num(d.speso);
+  const costoGiorno = num(d.costoGiornalieroEffettivo) || num(d.costoGiornaliero);
+  const autonomia = costoGiorno > 0 ? cassa / costoGiorno : Infinity;
+  const giorniResidui = Math.max(0, num(d.giorniStagione || 100) - num(d.giorno || 0) + 1);
+
+  document.title = `${d.progetto} — copertura ${copertura.toFixed(0)}%`;
+  document.getElementById('brand').innerHTML = `${d.progetto}<span>.</span>`;
+  document.getElementById('day').textContent =
+    `stagione ${d.stagione || 1} · giorno ${d.giorno || 0} / ${d.giorniStagione || 100}`;
+  document.getElementById('lede').textContent = d.sottotitolo || '';
+
+  document.getElementById('ricavo').textContent = eur(ricavo);
+  document.getElementById('netto').textContent = `netto stimato ${eur(netto)}`;
+  document.getElementById('copertura').textContent = copertura.toFixed(0) + '%';
+  document.getElementById('costonoto').textContent =
+    `riferimento ${eur(costi)}` + (num(d.spesaMese) ? ` · spesi ${eur(num(d.spesaMese))}` : '');
+
+  const elCrescita = document.getElementById('crescita');
+  elCrescita.textContent = crescita === null
+    ? '—'
+    : (crescita >= 0 ? '+' : '−') + Math.abs(crescita).toFixed(0) + '%';
+  elCrescita.className = 'v ' + (crescita === null ? '' : (crescita >= 0 ? 'acid' : 'warn'));
+  document.getElementById('precedente').textContent = prec
+    ? `vs ${meseIt(prec.mese)} (${eur(num(prec.ricavo))})`
+    : 'primo mese: base di partenza';
+
+  document.getElementById('autonomia').textContent = isFinite(autonomia) ? Math.floor(autonomia) + ' gg' : '—';
+  document.getElementById('giorni').textContent = `${giorniResidui} giorni alla fine della stagione`;
+
+  document.getElementById('pct').textContent = copertura.toFixed(0) + '%';
+  document.getElementById('fill').style.width = Math.max(0, Math.min(100, copertura)) + '%';
+  document.getElementById('bar-note').textContent = copertura >= 100
+    ? 'Coperto: da qui in poi ogni euro è crescita, non sopravvivenza.'
+    : `Mancano ${eur(Math.max(0, costi - ricavo))} al mese per non pesare più. Costo agente: ${eur2(costoGiorno)}/giorno.`;
+
+  const max = Math.max.apply(null, storico.map(x => Math.max(num(x.ricavo), num(x.costi))).concat([1]));
+  const plot = document.getElementById('plot');
+  plot.innerHTML = storico.map(x => {
+    const r = num(x.ricavo);
+    const h = Math.max(2, (r / max) * 100);
+    return `<div class="col">
+      <span class="val">${r > 0 ? eur(r) : ''}</span>
+      <b class="${r > 0 ? '' : 'zero'}" style="height:${Math.min(100, h)}%"></b>
+    </div>`;
+  }).join('') + `<div class="costline" style="bottom:${Math.min(100, (costi / max) * 100)}%"><em>costo ${eur(costi)}</em></div>`;
+  document.getElementById('labels').innerHTML = storico.map(x => `<span>${meseIt(x.mese)}</span>`).join('');
+
+  document.getElementById('movimenti').innerHTML = (d.movimenti || []).slice().reverse().map(m => {
+    const isIn = m.tipo === 'entrata';
+    return `<tr>
+      <td>${dateIt(m.data)}</td>
+      <td>${m.descrizione}</td>
+      <td style="color:var(--muted);font-size:12px">${m.fonte || '—'}</td>
+      <td class="num ${isIn ? 'in' : 'out'}">${isIn ? '+' : '−'}${eur2(Math.abs(m.importo))}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="4" style="color:var(--muted)">Nessun movimento.</td></tr>';
+
+  document.getElementById('giornale').innerHTML = (d.giornale || []).slice().reverse().map(g => `
+    <div class="entry">
+      <div class="d">giorno ${g.giorno} · ${dateIt(g.data)}</div>
+      <h4>${g.titolo}</h4>
+      <p>${g.testo}</p>
+    </div>`).join('') || '<p style="color:var(--muted)">Nessuna voce.</p>';
+
+  document.getElementById('foot-left').textContent =
+    `Catalogo: ${num(d.catalogo)} prodotti · cassa ${eur(cassa)} · mese corrente ${meseIt(corrente.mese)}`;
+}
+
+load().then(render).catch(err => {
+  document.getElementById('lede').innerHTML =
+    `<span class="err">Impossibile leggere data.json (${err.message}). Apri la dashboard da un server HTTP: <code>python3 -m http.server 3000 -d dashboard</code></span>`;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+  "keyword": [
+    {
+      "testo": "budget familiare excel",
+      "stato": "scelta",
+      "prezzo_mediano": 12.08,
+      "concorrenza": "listing italiani esistenti con recensioni (es. 21 recensioni a 12,08 €); mercato inglese 13,99-25 $",
+      "stagionale": false,
+      "verdetto": "scelta per il primo prodotto",
+      "fonte": "ricerca web su listing pubblici, 29/10/2026",
+      "nota": "Conteggio recensioni dei primi 12 risultati da verificare in sessione Etsy: i dati sono esterni, non da API."
+    },
+    {
+      "testo": "preventivo freelance excel",
+      "stato": "candidata",
+      "prezzo_mediano": 16.72,
+      "concorrenza": "modello video-preventivo a 16,72 € con 3 recensioni; utili modelli artigiani a 6,90 €",
+      "stagionale": false,
+      "verdetto": "secondo prodotto, se il primo prende visite",
+      "fonte": "ricerca web su listing pubblici, 29/10/2026"
+    }
+  ]
+}
