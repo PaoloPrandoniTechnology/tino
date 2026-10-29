@@ -11,23 +11,19 @@
 
 ## 0. La verità, senza addolcirla
 
-Con zero rete, zero pubblico e zero metodo, **100.000 € in 100 giorni non è un piano:
-è una scommessa con probabilità intorno all'1-2%.** Non perché tu sia incapace, ma
-perché quei 100k richiedono una leva che non possiedi: o un canale che porta 50 lead
-a settimana, o 30 clienti che comprano a 3.000 € da uno sconosciuto, o un pubblico
-che compra.
+Con zero rete, zero pubblico e zero metodo, la vendita di servizi è l'unico motore che
+produce cassa in fretta, ma richiede **il tuo lavoro**: venti contatti al giorno per
+novanta giorni. Questa variante resta nel repository come riferimento, non come piano
+operativo: il progetto è la fabbrica autonoma descritta in [SISTEMA.md](SISTEMA.md).
 
-La buona notizia: **non ti serve quella leva per fare un progetto che funziona.**
-Ti serve per fare 100k. Sono due cose diverse, e confonderle è il modo più comune di
-bruciare 100 giorni.
+Il numero che questo motore produce, quando funziona, è **7.000-10.000 € in 100 giorni**
+(la matematica sta nel punto 2). Non è una promessa: è il risultato di tassi di
+conversione realistici applicati a duemila contatti. Se i tassi sono peggiori, il
+risultato è peggiore.
 
-Quindi il piano ha due traguardi separati:
-
-- **Traguardo reale: 10.000 € in 100 giorni** (100 volte il capitale, raccontabile,
-  raggiungibile con vendita diretta).
-- **Traguardo 100.000 €**: lo tieni nel titolo se vuoi, ma con una data di verifica
-  al giorno 40. Se al giorno 40 sei sotto 3.000 €, il 100k è aritmeticamente morto
-  e lo dici in video. Non lo scopri al giorno 100.
+E vale per entrambe le varianti: **la cassa non è il traguardo.** Il traguardo è la
+copertura dei costi sostenuta tre mesi, con ricavo mensile in crescita. I numeri qui
+sotto dicono se il motore gira, non inseguono una cifra.
 
 ## 1. Cosa NON puoi fare (e va scartato subito)
 
@@ -66,9 +62,9 @@ sistemerei subito, gratis.
 | Upsell a sistema completo (990 €) | 40% dei clienti | 5-6 |
 | **Incasso risultante** | — | **7.000-10.000 €** |
 
-Ecco perché 10k è il traguardo vero: **è quello che questo motore produce quando
-funziona**. I 100k richiederebbero di moltiplicare per dieci la stessa macchina, cioè
-un canale che porta 200 contatti al giorno o un ticket da 3.000 € venduto a freddo —
+Ecco perché 7-10k è il numero che questo motore produce quando funziona: **è il
+risultato dei tassi della tabella, non un'ambizione.** Per dieci volte tanto servirebbe
+un canale che porta 200 contatti al giorno, o un ticket da 3.000 € venduto a freddo —
 cosa che a uno sconosciuto non succede.
 
 ## 3. L'offerta a scalini (perché 3.000 € a freddo non si vendono)
@@ -190,15 +186,14 @@ La differenza tra chi arriva a 1.000 € e chi arriva a 10.000 € è quasi solo
 | 5 | primo euro | vendi su marketplace, subito |
 | 15 | 800 € | offerta troppo cara o nicchia sbagliata: cambia una delle due |
 | 30 | 2.500 € | il motore non gira: passa a nicchia adiacente, non a nuovo format |
-| 40 | 4.000 € | **dichiara che i 100k non arriveranno**. Non aspettare il giorno 100. |
+| 40 | 4.000 € | l'offerta o la nicchia sono sbagliate: cambiane una, subito. |
 | 60 | 6.500 € | valuta un collaboratore a provvigione (un giovane che telefona) |
 | 80 | 8.500 € | spingi l'upsell a 990 € sui clienti già acquisiti |
 | 100 | **10.000 €** | resoconto completo, conti aperti, stagione 2 |
 
-**Gate dei 100k**: per arrivarci servirebbe, al giorno 40, un run-rate di 1.500 €/mese
-in crescita del 40% al mese, oppure un singolo cliente da 20.000 €. Se non c'è, il
-numero resta nel titolo come promessa mancata da raccontare — che è comunque
-contenuto, purché sia detto prima e non dopo.
+**Gate del run-rate**: al giorno 40 il motore deve girare a 1.500 €/mese in crescita
+del 40% al mese, oppure avere un cliente a 2.500 €/mese. Se non c'è, il problema è il
+canale o il prezzo, e si corregge quello — non si aspetta il giorno 100 sperando.
 
 ## 11. I quattro numeri da guardare
 
@@ -218,7 +213,8 @@ Se la cassa scende sotto 7 giorni e i contatti sono zero, non è colpa del video
    tecnologia. Nei video sì, nei preventivi no.
 3. **L'agente non sostituisce le telefonate**: se lo usi per non parlare con nessuno,
    il progetto muore in due settimane.
-4. **Il traguardo 100k ti fa sembrare un millantatore** al giorno 40. Meglio
-   dichiarare il doppio traguardo dal giorno 1: è l'unica versione che regge.
+4. **Le promesse in euro invecchiano male**: dichiara dal giorno 1 che il traguardo è
+   la copertura dei costi, non una cifra. Un importo promesso si smentisce alla prima
+   verifica, e ti costa la credibilità che ti serve per tutto il resto.
 5. **Nessuno ti presenta nessuno**: le 20 telefonate ai commercialisti vanno fatte
    anche quando sembrano inutili. Sono l'unica vera scorciatoia che hai.

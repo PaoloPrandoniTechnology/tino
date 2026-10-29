@@ -6,8 +6,7 @@ una **curva**: prima l'autocopertura, poi la crescita mese su mese.
 
 ## Il traguardo, in una riga
 
-L'agente non deve "guadagnare 100.000 €": deve smettere di pesare e cominciare a
-crescere. Autocopertura entro il giorno 100, sostenuta tre mesi, con ricavo mensile in
+L'agente non insegue una cifra: deve smettere di pesare e cominciare a crescere. Autocopertura entro il giorno 100, sostenuta tre mesi, con ricavo mensile in
 aumento di almeno il 50% a ogni stagione. Dettaglio in [REGOLAMENTO.md](REGOLAMENTO.md).
 
 ## Due modalità, una scelta obbligatoria
