@@ -1,55 +1,104 @@
-# Sfida: un agente che si mantiene da solo e cresce
+# Tino
 
-Replica strutturata del format "agente AI che deve mantenersi da solo", con due vincoli
-precisi: **l'umano fa solo supervisione** e il traguardo non è un numero in euro, ma
-una **curva**: prima l'autocopertura, poi la crescita mese su mese.
+**Un agente AI che parte con 100 € e deve smettere di pesare sui conti di chi lo
+mantiene. Poi crescere.**
 
-## Il traguardo, in una riga
+Nessun pubblico, nessuna rete di contatti, nessun cliente da chiamare. Tino vende
+prodotti digitali dove i compratori esistono già — Etsy, Amazon KDP, Adobe Stock — e
+lavora come si gestisce un catalogo: cerca domanda, produce l'oggetto che la soddisfa,
+misura, pota il 30% peggiore, ricomincia. Quattro esecuzioni a settimana.
 
-L'agente non insegue una cifra: deve smettere di pesare e cominciare a crescere. Autocopertura entro il giorno 100, sostenuta tre mesi, con ricavo mensile in
-aumento di almeno il 50% a ogni stagione. Dettaglio in [REGOLAMENTO.md](REGOLAMENTO.md).
+L'umano non vende, non scrive listing, non parla con nessuno. Approva le pubblicazioni,
+firma il fiscale e risponde alle contestazioni difficili: **1-2 ore a settimana** nei
+primi due mesi, mezz'ora a regime.
 
-## Due modalità, una scelta obbligatoria
+## Il traguardo non è una cifra
 
-| | **Fabbrica** (autonoma) | **Servizi** (dipende da te) |
+È una curva. Tre numeri, sempre gli stessi:
+
+| Metrica | Cosa significa | Quando è un successo |
 |---|---|---|
-| Come vende | marketplace con domanda propria | telefono, demo, fiducia |
-| Lavoro umano | 4-6 h/settimana, poi 2-3 h/mese | 20 contatti al giorno |
-| Prima entrata | 30-60 giorni | 5-10 giorni |
-| A 100 giorni | 0-1.500 €, copertura possibile | 7.000-10.000 € |
-| A 12 mesi | 500-1.500 €/mese ricorrenti | limitato dalle tue ore |
-| Compatibile con "solo supervisione" | **sì** | no |
+| **Copertura** | ricavo del mese ÷ costo del mese | ≥ 100% per tre mesi consecutivi |
+| **Crescita** | ricavo mensile rispetto alla stagione precedente | ≥ +50% a ogni stagione |
+| **Ricavo per listing** | quanto rende ogni prodotto attivo, non quanto produce in totale | stabile o crescente |
 
-L'autonomia è lenta, la velocità richiede vendita umana. Solo la colonna di sinistra
-rispetta il requisito, e solo la colonna di sinistra produce una curva che si alza da
-sola.
+Copertura al 100% significa che l'agente non pesa più. Al 150% comincia a finanziare la
+propria crescita. Sotto il 100% è un progetto sovvenzionato, e va detto.
+
+**Perché non "guadagnare X €":** un importo promesso si smentisce alla prima verifica e
+ti costa la credibilità che serve per tutto il resto. La copertura non si può barare:
+o i conti tornano, o no.
+
+## Come funziona, in cinque righe
+
+La distribuzione non si costruisce, si affitta: si vende su marketplace che hanno già
+i compratori dentro. L'agente produce, confeziona il listing, misura e pota; l'umano
+approva e firma. Il modello non è un prodotto che vende, è un **catalogo che si
+accumula**: ogni listing pubblicato continua a essere trovato anche quando l'agente
+dorme. Il collo di bottiglia è la qualità, non la quantità — 2-4 listing a settimana,
+mai di più, perché i contenuti generati in massa chiudono il negozio.
 
 ## Cosa c'è qui
 
 | File | Cos'è |
 |---|---|
-| [SISTEMA.md](SISTEMA.md) | Architettura: principio, piattaforme verificate, equazione della crescita, reinvestimento, kill rules. |
-| [AGENTE-FABBRICA.md](AGENTE-FABBRICA.md) | Loop settimanale, stato, prompt pronto, filtro di qualità umano. |
-| [OPERATIVO.md](OPERATIVO.md) | Come opera Tino nel concreto: calendario, sette passi di produzione, soglie, potatura, denaro, eccezioni. |
-| [PRODOTTI.md](PRODOTTI.md) | Cosa produrrà: quattro famiglie, sei schede del primo mese, esclusioni, test di validità. |
-| [INFRA.md](INFRA.md) | Dove vive: repository, cron, stato, segreti, costi e limiti reali. |
-| [REGOLAMENTO.md](REGOLAMENTO.md) | Le regole pubbliche: capitale, curva, contabilità, reinvestimento. |
-| [PIANO.md](PIANO.md) | La variante "servizi", se un giorno accetti di lavorare. |
-| [AGENTE.md](AGENTE.md) | Charter dell'agente nella variante servizi. |
-| `dashboard/` | Copertura, crescita, catalogo, movimenti, giornale. |
+| [SISTEMA.md](SISTEMA.md) | Architettura: principio, piattaforme verificate, equazione della crescita, kill rules. |
+| [OPERATIVO.md](OPERATIVO.md) | Il runbook: la settimana, i sette passi di produzione, le soglie, la potatura, i soldi. |
+| [PRODOTTI.md](PRODOTTI.md) | Cosa produce: famiglie di prodotto, listino, esclusioni, test di validità. |
+| [AGENTE-FABBRICA.md](AGENTE-FABBRICA.md) | Il loop dell'agente, lo stato, il charter, il filtro di qualità umano. |
+| [INFRA.md](INFRA.md) | Dove vive: repository, cron, stato, segreti, costi reali. |
+| [REGOLAMENTO.md](REGOLAMENTO.md) | Le regole pubbliche: capitale, curva, contabilità, cosa si pubblica. |
+| `agente/` | Il codice: ledger append-only, metriche, loop, chiamata opzionale al modello. |
+| `dashboard/` | La vetrina: copertura, crescita, catalogo, movimenti, giornale di bordo. |
+| `prodotti/` | Il primo prodotto: file Excel, anteprime, listing pronto da pubblicare. |
 
-## La sintesi in cinque righe
+## Cosa vedi e cosa non vedi
 
-Non si automatizza lo scambio, si affitta la distribuzione: si vende dove i compratori
-esistono già (Etsy, Amazon KDP, Adobe Stock) e si escludono le piattaforme che vietano
-l'automazione (Fiverr, Upwork) o l'AI (Shutterstock, Envato). L'agente produce, misura
-e pota; l'umano approva e firma. Break-even: ~143 €/mese lordi sul costo di riferimento
-di 108 €/mese (la spesa reale in avvio è ~16 €/mese). Poi ogni listing in più
-è rendita: il ricavo è catalogo × visite × conversione × prezzo, e il catalogo si accumula.
+Questo progetto vale quanto la possibilità di controllarlo. Quindi:
 
-## Avviare la dashboard
+**Pubblico.** Capitale e ogni movimento del ledger, ricavi e costi aggregati, catalogo e
+stato dei listing, decisioni con il motivo, giornale di bordo quotidiano, codice
+dell'agente, storico dei commit.
+
+**Non pubblico.** Dati personali e fiscali del titolare, credenziali e chiavi, dati dei
+clienti oltre a quanto serve per evadere un ordine, i file vendibili (stanno in un
+archivio privato: un file in un repo pubblico è un file gratis), comunicazioni private
+con clienti e piattaforme.
+
+Regola unica: **ogni numero pubblicato ha una fonte nel ledger.** Se la fonte non c'è,
+il numero non si pubblica. Nessuna stima presentata come incasso, nessun follower
+contato come cliente.
+
+## Le regole che non si cambiano in corsa
+
+1. **100 € esatti** di partenza. Nessun euro esterno, mai.
+2. Autocopertura entro il **giorno 100**, sostenuta **tre mesi**.
+3. Ogni stagione chiude con ricavo mensile **almeno +50%**.
+4. Due stagioni senza crescita chiudono il progetto.
+5. Sopra **25 €** di spesa decide l'umano, non l'agente.
+6. Cassa sotto **7 giorni**: l'agente taglia i propri costi prima di chiedere altro lavoro.
+7. Vietati trading, scommesse, crypto, follower e recensioni comprate, pubblicazione in massa.
+
+Le regole complete, con le sanzioni, stanno in [REGOLAMENTO.md](REGOLAMENTO.md).
+
+## Seguire il progetto
+
+Il repository è la fonte: ogni esecuzione lascia un commit con data, diff e log. La
+dashboard è un sito statico che legge `data.json` committato dall'agente — nessun
+server, nessun database, nessun numero inserito a mano.
 
 ```bash
 python3 -m http.server 3000 -d dashboard
 # → http://localhost:3000
 ```
+
+Il ledger si verifica in un comando:
+
+```bash
+python3 -m agente.ledger --check state/ledger.jsonl
+# → OK: catena integra
+```
+
+Se un movimento viene modificato o rimosso, la catena di hash si rompe e il controllo
+fallisce: è il motivo per cui il ledger è append-only e non un foglio che si può
+aggiustare.

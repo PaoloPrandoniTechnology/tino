@@ -87,25 +87,21 @@ qualsiasi hosting statico (Cloudflare Pages, Sites, Netlify) collegato al repo. 
 codice server, zero database, zero costi. Il giorno in cui servirà qualcosa di dinamico
 (login, area riservata) si aggiunge un Worker, non un server.
 
-## 6. Le tre opzioni, e quale scegliere
+## 6. La configurazione, e perché è questa
 
-| | **A. Repo pubblico + R2** | **B. Repo privato + Pro** | **C. VPS** |
-|---|---|---|---|
-| Costo | 0 €/mese | ~4 $/mese | 4-5 €/mese |
-| Trasparenza | totale (è il prodotto) | va costruita a parte | come B |
-| Manutenzione | nessuna | nessuna | aggiornamenti, backup, monitoraggio |
-| Prodotti al sicuro | sì (bucket privato) | sì (per definizione) | sì |
-| Setup | 1-2 ore | 1 ora | mezza giornata |
-| Serve se... | caso normale | non vuoi il codice pubblico | ti serve un agente sempre acceso o un browser |
+Repo pubblico, cron di GitHub Actions, dashboard statica, prodotti su archivio privato.
+Costo: **0 €/mese**. È la configurazione in uso, non un'opzione fra tre.
 
-**Scelta consigliata: A.** Il progetto vende trasparenza: nascondere il codice sarebbe
-un autogol narrativo, e il costo è zero. Il bucket privato risolve l'unico problema
-vero, i file vendibili.
+- **Codice pubblico perché è il prodotto**: la promessa "i numeri sono veri" vale
+  quanto la possibilità di verificarla. Un repo privato la trasformerebbe in una
+  dichiarazione, e le dichiarazioni non si controllano.
+- **Prodotti fuori dal repo**: un file vendibile in un repo pubblico è un file gratis.
+- **Nessun server**: un VPS aggiungerebbe 4-5 €/mese, aggiornamenti, certificati e un
+  punto di rottura, senza risolvere nessuno dei problemi attuali.
 
-**Passa a C solo** quando serviranno cose che un cron non può fare: rispondere ai
-messaggi in pochi minuti, usare un browser per leggere dati che nessuna API espone,
-eseguire job più lunghi di sei ore. Fino a quel momento un VPS è solo un costo e un
-punto di rottura in più.
+Si cambia solo quando servirà ciò che un cron non sa fare: rispondere in pochi minuti,
+leggere dati che nessuna API espone, o job oltre le sei ore. A quel punto si aggiunge
+un Worker, non si sposta tutto.
 
 ## 7. Il limite che nessuna infrastruttura risolve
 
@@ -118,14 +114,17 @@ messi nel conto della supervisione — non nella colonna "automatico".
 Chi promette un agente che "trova da solo i prodotti vincenti" sta vendendo uno scraper
 che viola i termini di servizio della piattaforma, e chiude il negozio.
 
-## 8. Setup, in ordine
+## 8. Stato del setup
 
-1. Crea il repo **pubblico** `tino` con la struttura di sopra.
-2. Aggiungi il Secret `ANTHROPIC_API_KEY` (o equivalente). Mai nel codice.
-3. Crea il bucket R2 privato `tino-prodotti` e metti le credenziali nei Secret.
-4. Scrivi `run.yml` con i 4 cron e i passi 1-5.
-5. Collega `dashboard/` all'hosting statico.
-6. Lancia un'esecuzione manuale (`workflow_dispatch`) e verifica che il commit parta.
-7. Prova a riscrivere un movimento del ledger: lo script deve rifiutare il commit.
-8. Pubblica il primo aggiornamento con il link al repo: da quel momento la trasparenza
-   non è una promessa, è un indirizzo web.
+**Fatto**: repo pubblico `PaoloPrandoniTechnology/tino`; workflow con quattro cron e
+`workflow_dispatch`; verifica del ledger prima e dopo ogni esecuzione; commit
+automatico di stato e dashboard; catena di hash sul ledger; dashboard statica che legge
+`data.json`.
+
+**Da fare**: archivio privato per i file vendibili, hosting statico per la dashboard,
+Secret `ANTHROPIC_API_KEY` (opzionale: senza chiave il loop gira e produce report,
+solo senza le due frasi di commento del modello).
+
+**Controllo che vale la pena fare una volta**: provare a modificare un movimento del
+ledger e verificare che il commit venga rifiutato. Se passa, la trasparenza è un
+adesivo.

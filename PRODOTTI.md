@@ -79,7 +79,7 @@ creazione: è il modo più economico di far crescere il ricavo senza crescere il
 
 | # | Prodotto | Famiglia | Prezzo | Piattaforma |
 |---|---|---|---|---|
-| 1 | Budget familiare (Excel, IT + EN) | A | 19 € | Etsy |
+| 1 | Budget familiare (Excel, IT + EN) | A | 14,90 € | Etsy — **pronto** |
 | 2 | Preventivi e incassi per freelance (Excel + PDF) | A | 24 € | Etsy |
 | 3 | Planner di studio con link interni (PDF) | C | 14 € | Etsy |
 | 4 | Kit proposta commerciale (DOCX + PPTX) | B | 19 € | Etsy |

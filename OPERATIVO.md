@@ -38,10 +38,10 @@ Output: **2 keyword**, ognuna con volume, concorrenza, prezzo mediano e un link 
 primi tre risultati. Se nessuna passa, la settimana si salta: non si produce per
 riempire il calendario.
 
-**Passo 2 — Brief (agente, ~10 min).** Chi compra, quale problema ha, in che formato
-lo risolvi, quanto costa, in cosa è diverso dai primi tre risultati. Una pagina.
+**Passo 2 — Scheda prodotto (agente, ~10 min).** Chi compra, quale problema ha, in che
+formato lo risolvi, quanto costa, in cosa è diverso dai primi tre risultati. Una pagina.
 
-**Passo 3 — Produzione (agente, 40-90 min).** Un prodotto = un problema. Se il brief
+**Passo 3 — Produzione (agente, 40-90 min).** Un prodotto = un problema. Se la scheda
 contiene due problemi, si spezza in due prodotti.
 
 **Passo 4 — Confezione (agente, ~20 min).** File utilizzabile senza spiegazioni, 5

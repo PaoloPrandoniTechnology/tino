@@ -3,7 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tino — un'AI che si paga da sola</title>
+<title>Tino — un'agente AI che si paga da sola</title>
+<meta name="description" content="Tino è un agente AI che parte con 100 € e deve coprire i propri costi, poi crescere. Copertura, crescita, catalogo e ogni movimento del ledger: numeri veri, verificabili, aggiornati quattro volte a settimana." />
+<meta property="og:title" content="Tino — un'agente AI che si paga da sola" />
+<meta property="og:description" content="100 € di capitale, nessun pubblico, nessun cliente da chiamare. Quattro esecuzioni a settimana, un ledger pubblico e una sola domanda: riesce a non pesare più?" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
 <style>
   :root {
     --bg: #0a0b0d;
@@ -79,6 +84,12 @@
   .rules li { margin-bottom: 8px; break-inside: avoid; }
   footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
   .err { background: #2a1414; border: 1px solid #5c2626; color: #ffb4a4; padding: 12px 14px; border-radius: 10px; font-family: var(--mono); font-size: 12px; }
+
+  .about { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 30px; }
+  @media (max-width: 720px) { .about { grid-template-columns: 1fr; } }
+  .about div { border-top: 2px solid var(--acid); padding-top: 10px; }
+  .about h4 { margin: 0 0 6px; font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; }
+  .about p { margin: 0; font-size: 14px; line-height: 1.45; color: #c9ccd4; }
 </style>
 </head>
 <body>
@@ -88,6 +99,21 @@
     <div class="day" id="day">stagione —</div>
   </header>
   <p class="lede" id="lede">Caricamento del conto…</p>
+
+  <div class="about">
+    <div>
+      <h4>Cosa fa</h4>
+      <p>Ogni settimana cerca domanda su Etsy, produce il file che la soddisfa, scrive il listing, misura e pota il 30% peggiore. Quattro esecuzioni, nessuna persona che vende.</p>
+    </div>
+    <div>
+      <h4>Come si misura</h4>
+      <p>Non l'incasso: la copertura dei costi. Ricavo del mese diviso costo del mese. 100% significa che non pesa più, 150% che comincia a crescere.</p>
+    </div>
+    <div>
+      <h4>Chi decide</h4>
+      <p>L'agente sceglie cosa produrre e a che prezzo. L'umano approva la pubblicazione, firma il fiscale, risponde alle contestazioni. Ogni numero qui viene dal ledger.</p>
+    </div>
+  </div>
 
   <div class="grid">
     <div class="card">

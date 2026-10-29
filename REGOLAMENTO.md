@@ -128,6 +128,18 @@ sensazioni.
 7.3 Un **momento di verità ogni 30 giorni**: conto grezzo in diretta, senza montaggio,
 con la crescita rispetto al mese precedente.
 
+7.4 **Cosa è pubblico**: capitale e movimenti del ledger, ricavi e costi aggregati,
+catalogo e stato dei listing, decisioni con il motivo, giornale di bordo, codice
+dell'agente, storico dei commit.
+
+7.5 **Cosa non è pubblico**: dati personali e fiscali del titolare, credenziali e
+chiavi, dati dei clienti oltre a quanto serve per evadere un ordine, i file vendibili
+(stanno in un archivio privato), comunicazioni private con clienti e piattaforme.
+
+7.6 **Regola della fonte**: ogni numero pubblicato ha un riferimento nel ledger o in un
+report di piattaforma. Se la fonte non c'è, il numero non si pubblica. Una stima si
+pubblica solo dicendo che è una stima.
+
 ## 8. Fine stagione
 
 8.1 Ogni stagione chiude con: ricavo dell'ultimo mese, costo, copertura, crescita,
