@@ -54,3 +54,18 @@ jobs:
             git commit -m "run $(date -u +%F)"
             git push
           fi
+
+      # Il conto del giorno sul telefono del titolare. Se non c'è nessun canale
+      # configurato lo script stampa il messaggio ed esce con 0; se un invio
+      # fallisce, `continue-on-error` evita che la notifica faccia fallire
+      # un'esecuzione che ha già committato il proprio lavoro.
+      - name: Notifica al titolare
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          WHATSAPP_TOKEN: ${{ secrets.WHATSAPP_TOKEN }}
+          WHATSAPP_PHONE_ID: ${{ secrets.WHATSAPP_PHONE_ID }}
+          WHATSAPP_TO: ${{ secrets.WHATSAPP_TO }}
+          WHATSAPP_TEMPLATE: ${{ secrets.WHATSAPP_TEMPLATE }}
+        run: python3 -m agente.notifica --state state
