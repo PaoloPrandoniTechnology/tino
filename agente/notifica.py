@@ -43,7 +43,8 @@ def componi(report):
         f"Ricavo del mese: {_euro(report['ricavo_mese'])} · copertura {report['copertura']:.0f}%",
         f"Crescita mese su mese: {'n/d' if crescita is None else f'{crescita:+.0f}%'}",
         f"Cassa: {_euro(report['cassa'])} · autonomia {'n/d' if autonomia is None else f'{autonomia} giorni'}",
-        f"Catalogo: {report['catalogo']} prodotti · {report['listing_attivi']} listing attivi",
+        f"Catalogo: {report['catalogo']} {'prodotto' if report['catalogo'] == 1 else 'prodotti'} · "
+        f"{report['listing_attivi']} listing attivi",
     ]
     da_potare = report.get("da_potare") or []
     da_riscrivere = report.get("da_riscrivere") or []
