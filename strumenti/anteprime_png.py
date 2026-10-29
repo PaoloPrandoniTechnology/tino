@@ -59,10 +59,11 @@ def _titolo(d, testo, sottotitolo=None, y=110, dim=76):
     d.line([MARGINE, y + dim + (100 if sottotitolo else 50), L - MARGINE, y + dim + (100 if sottotitolo else 50)], fill=BORDO, width=2)
 
 
-def _tabella(d, x, y, larghezze, righe, allineamenti, altezza=62, evidenzia=()):
-    f_header = _font(28, True)
-    f_cella = _font(28)
-    f_bold = _font(28, True)
+def _tabella(d, x, y, larghezze, righe, allineamenti, altezza=62, evidenzia=(),
+             dim_cella=28, padding=18):
+    f_header = _font(dim_cella, True)
+    f_cella = _font(dim_cella)
+    f_bold = _font(dim_cella, True)
     for indice, riga in enumerate(righe):
         cx = x
         for colonna, (testo, larghezza) in enumerate(zip(riga, larghezze)):
@@ -72,12 +73,12 @@ def _tabella(d, x, y, larghezze, righe, allineamenti, altezza=62, evidenzia=()):
             allineamento = allineamenti[colonna]
             if allineamento == "r":
                 box = d.textbbox((0, 0), testo, font=f)
-                tx = cx + larghezza - 18 - (box[2] - box[0])
+                tx = cx + larghezza - padding - (box[2] - box[0])
             elif allineamento == "c":
                 box = d.textbbox((0, 0), testo, font=f)
                 tx = cx + (larghezza - (box[2] - box[0])) / 2
             else:
-                tx = cx + 18
+                tx = cx + padding
             d.text((tx, y + (altezza - 34) / 2), testo, font=f, fill=INCHIOSTRO)
             cx += larghezza
         y += altezza
@@ -108,7 +109,7 @@ def _righe_budget():
                  + [_eur(v) for v in totale_uscite_mesi] + [_eur(totale_uscite)])
     indice_totale_uscite = len(righe) - 1
 
-    saldo = [1_150 if False else a - b for a, b in zip(totale_entrate_mesi, totale_uscite_mesi)]
+    saldo = [a - b for a, b in zip(totale_entrate_mesi, totale_uscite_mesi)]
     righe.append(["SALDO", "", ""] + [_eur(v) for v in saldo] + [_eur(totale_entrate - totale_uscite)])
     indice_saldo = len(righe) - 1
 
@@ -124,13 +125,24 @@ def copertina():
     righe = [
         "12 mesi in una schermata",
         "9 categorie modificabili",
-        "Totale annuo e tasso di risparmio automatici",
+        "Totali e risparmio automatici",
     ]
-    y = 650
+    y = 660
     for r in righe:
         d.ellipse([MARGINE, y + 12, MARGINE + 16, y + 28], fill=INCHIOSTRO)
-        d.text((MARGINE + 40, y), r, font=_font(40), fill=INCHIOSTRO)
-        y += 76
+        d.text((MARGINE + 40, y), r, font=_font(38), fill=INCHIOSTRO)
+        y += 74
+
+    # pannello con i numeri di esempio: riempie la metà destra e mostra l'output
+    px, py = 1210, 360
+    d.rounded_rectangle([px, py, L - MARGINE, py + 570], radius=22, fill=EVIDENZA)
+    d.text((px + 44, py + 44), "Esempio di output", font=_font(26), fill=GRIGIO)
+    voci = [("Risparmio dell'anno", "2.816 €"), ("Tasso di risparmio", "22,6%"), ("Mesi tracciati", "12")]
+    yy = py + 122
+    for etichetta, valore in voci:
+        d.text((px + 44, yy), etichetta, font=_font(28), fill=GRIGIO)
+        d.text((px + 44, yy + 44), valore, font=_font(54, True), fill=INCHIOSTRO)
+        yy += 152
     d.rectangle([MARGINE, 1130, L - MARGINE, 1134], fill=BORDO)
     d.text((MARGINE, 1180), "Foglio di calcolo Excel · download immediato", font=_font(34), fill=GRIGIO)
     d.text((MARGINE, 1300), "Excel 2016+  ·  LibreOffice  ·  Google Fogli", font=_font(28), fill=TENUE)
@@ -163,8 +175,12 @@ def foglio_budget():
     img, d = _tela()
     _titolo(d, "Foglio Budget", "12 mesi, 9 categorie, totali automatici", dim=64)
     righe, evidenzia = _righe_budget()
-    larghezze = [500, 150, 190] + [160] * 6 + [210]
-    _tabella(d, MARGINE, 360, larghezze, righe, ["l", "l", "r", "r", "r", "r", "r", "r", "r", "r"], evidenzia=evidenzia)
+    larghezze = [420, 130, 165] + [145] * 6 + [175]
+    _tabella(
+        d, MARGINE, 360, larghezze, righe,
+        ["l", "l", "r", "r", "r", "r", "r", "r", "r", "r"],
+        evidenzia=evidenzia, dim_cella=25, padding=12,
+    )
     d.text((MARGINE, 1360), "Valori di esempio: le formule lavorano sui tuoi numeri.",
            font=_font(28), fill=TENUE)
     img.save(os.path.join(CARTELLA, "03-foglio-budget.png"), optimize=True)
