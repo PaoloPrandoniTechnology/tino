@@ -2,6 +2,25 @@
 
 Tutto quello che serve è qui. Tu fai solo click, login e incolla: il resto è già scritto.
 
+## 0. I due link e le due azioni tue
+
+| Cosa | Link | Cosa fai |
+|---|---|---|
+| Repository | https://github.com/new?name=tino&visibility=public | Crea repo `tino`, **pubblico**, senza README né .gitignore (ci sono già) |
+| Negozio | https://www.etsy.com/sell | Apri il negozio: KYC, dati fiscali, IBAN |
+| Listing | https://www.etsy.com/your/shops/me/tools/listings/create | Compila con i blocchi qui sotto |
+
+Appena il repo esiste, dalla cartella del progetto:
+
+```bash
+bash COLLEGA-GITHUB.sh TUO-UTENTE
+```
+
+Lo script imposta il remote, committa quello che manca e pusha su `main`.
+Se il push chiede la password: usa un **token** (GitHub → Settings → Developer settings →
+Personal access tokens → Fine-grained → scope `Contents: write` sul repo `tino`), non la password
+dell'account.
+
 ## 1. File da caricare
 
 | Cosa | File |
