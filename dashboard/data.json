@@ -4,7 +4,7 @@
   "stagione": 1,
   "inizio": "2026-11-02",
   "giorniStagione": 100,
-  "giorno": 11,
+  "giorno": 12,
   "cassaIniziale": 100,
   "costoGiornaliero": 3.58,
   "costoGiornalieroEffettivo": 0.55,
@@ -97,6 +97,12 @@
       "giorno": 11,
       "data": "2026-11-12",
       "titolo": "Giorno 11 — copertura 0%",
+      "testo": "Ricavo del mese 0.00 €, cassa 99.00 €, autonomia 185 giorni. Catalogo: 1 prodotti."
+    },
+    {
+      "giorno": 12,
+      "data": "2026-11-13",
+      "titolo": "Giorno 12 — copertura 0%",
       "testo": "Ricavo del mese 0.00 €, cassa 99.00 €, autonomia 185 giorni. Catalogo: 1 prodotti."
     }
   ],
